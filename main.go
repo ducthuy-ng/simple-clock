@@ -22,6 +22,7 @@ const (
 
 func main() {
 	possiblePrograms := []programs.Program{
+		programs.NewGalleryProgram("/tmp/images"),
 		programs.NewAnalogClockProgram(),
 		programs.NewClockProgram(),
 	}
@@ -47,11 +48,10 @@ func main() {
 			program.Init(buffer)
 		}
 
-		fpsTicker := time.NewTicker(time.Second / UPDATE_RATE_PER_SECOND)
-
+		timer := time.NewTimer(time.Second / UPDATE_RATE_PER_SECOND)
 		go func() {
 			for {
-				<-fpsTicker.C
+				<-timer.C
 				window.Send(paint.Event{})
 			}
 		}()
@@ -69,6 +69,7 @@ func main() {
 				buffer := program.Draw()
 				window.Upload(image.Point{0, 0}, buffer, buffer.Bounds())
 				window.Publish()
+				timer.Reset(time.Second / UPDATE_RATE_PER_SECOND)
 			case key.Event:
 				if e.Code == key.CodeEscape {
 					return

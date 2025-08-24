@@ -43,10 +43,6 @@ func (clockProgram *ClockProgram) Draw() screen.Buffer {
 	return clockProgram.buffer
 }
 
-func (clockProgram *ClockProgram) Release() {
-	clockProgram.buffer.Release()
-}
-
 func (clockProgram *ClockProgram) renderText(input string, buffer screen.Buffer, opts text.RenderTextOpts) {
 	// Set text background
 	textColorMask := image.NewUniform(opts.Color)

@@ -31,10 +31,6 @@ func (program *AnalogClockProgram) Draw() screen.Buffer {
 	return program.buffer
 }
 
-func (program *AnalogClockProgram) Release() {
-	panic("TODO: Implement")
-}
-
 func (program *AnalogClockProgram) fillBackground(color1 color.Color) {
 	for x := 0; x < program.buffer.Size().X; x++ {
 		for y := 0; y < program.buffer.Size().Y; y++ {
